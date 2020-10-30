@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 /**
@@ -16,6 +18,14 @@ import javax.persistence.Table;
  * @author dudduguntaaji.reddy
  *
  */
+
+@NamedQueries( {
+	@NamedQuery (
+			name = "findEmployeeByname",
+			query="from Employee emp where empdec.empName=:name"
+			)
+}
+)
 @Entity
 @Table(name="EMPDEC")
 public class Employee {

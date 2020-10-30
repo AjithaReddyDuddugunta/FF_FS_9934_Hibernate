@@ -30,18 +30,23 @@ public class MainOne {
 		int count=0;
 		for (Employee e : employeelist) {
 			for (Address a : e.getAddress()) {
-				if(a.getCountry().equals("India")) {
+				System.out.println(e);
+				if(a.getCountry().equals("India") && a.getType().equals("Work")) {
 					count++;
 				}
-				System.out.println(e);
-				System.out.println(a.getCountry());
 			}
 		}
-		System.out.println("Number of employees working in India are : "+count);
+	}
+	String nativeSql = "Select count(distinct(empId) From EMPDEC e, ADDDEC a where empId = a.empId and a.country='India' and a.type='Work'";
+	@SuppressWarnings("rawtypes")
+	Query query1 = session.createSQLQuery(nativeSql);
+	System.out.println("Number of employees working in India are : "+query1.getResultList().get(0));
+	//System.out.println("Number of employees working in India are : "+count);
 		/**
 		 * Closing the session.
 		 */
-		factory.close();
 		session.close();
+		factory.close();
+		
 	}
 }
